@@ -1,0 +1,31 @@
+.title {
+  width: 400px;
+  white-space: wrap;
+  object-fit: contain;
+}
+.title1 {
+  width: 275px;
+  white-space: wrap;
+  object-fit: contain;
+}
+.title__content {
+  background-color: rgb(248, 248, 248);
+  white-space: wrap;
+  cursor: pointer;
+  padding: 13px;
+}
+.title__content1 {
+  background-color: rgb(248, 248, 248);
+  white-space: wrap;
+  cursor: pointer;
+  padding: 21.5px;
+}
+.title__name {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  clear: both;
+  position: relative;
+  left: 45px;
+  top: -28px;
+}

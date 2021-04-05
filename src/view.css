@@ -1,0 +1,46 @@
+.view__screen {
+  width: 100%;
+}
+img.view__image {
+  width: 200px;
+  position: relative;
+  left: 200px;
+  top: 50px;
+}
+.view__trackName {
+  text-align: center;
+}
+.view__details {
+  position: relative;
+  left: 10px;
+  top: 60px;
+}
+.view__heart {
+  position: absolute;
+  top: 120px;
+  left: 850px;
+}
+.view_audioPreview {
+  position: relative;
+  top: 90px;
+}
+.view_videoPreview {
+  position: relative;
+  top: 70px;
+}
+.view__heart {
+  display: block;
+}
+.view__audio {
+  position: relative;
+  left: 100px;
+  top: 100px;
+  outline: none;
+}
+
+.view__video {
+  position: relative;
+  left: 65px;
+  top: 70px;
+  outline: none;
+}

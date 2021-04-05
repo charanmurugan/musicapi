@@ -1,23 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import { useState } from "react";
+import axios from "axios";
+import Title from "./Title";
+import { useDispatch, useSelector } from "react-redux";
+import View from "./View";
 
 function App() {
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  let view = useSelector((state) => state.view.view);
+  let result;
+  const dispatch = useDispatch();
+
+  const updateSearch = (e) => {
+    setSearch(e.target.value);
+  };
+  const setItemSearch = async () => {
+    dispatch({
+      type: "REMOVE_FROM_BASKETVIEW",
+    });
+    dispatch({
+      type: "REMOVE_FROM_BASKET",
+    });
+    setSearch(" ");
+    setLoading(true);
+    await axios
+      .get(`https://itunes.apple.com/search?term=${search}`)
+      .then((response) => {
+        result = response.data.results;
+        setLoading(false);
+        dispatch({
+          type: "ADD_TO_BASKET",
+          item: {
+            result: result,
+          },
+        });
+      });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="app__header">
+        <img
+          src="https://charanmurugan-portfolio.netlify.app/images/cmlogo.jpg"
+          alt=""
+          className="app__headerImage"
+        />
+        <input className="app__input" onChange={updateSearch} value={search} />
+        <IconButton color="inherit" className="app__searchIcon">
+          <Badge color="secondary">
+            <SearchIcon onClick={setItemSearch} />
+          </Badge>
+        </IconButton>
+        <IconButton color="inherit">
+          <Badge color="secondary">
+            <i
+              className="fa fa-heart"
+              aria-hidden="true"
+              style={{ color: "red" }}
+            ></i>
+          </Badge>
+        </IconButton>
+      </div>
+      <div className="search__results">
+        <Title loading={loading} />
+        {view.length === 1 && <View />}
+      </div>
     </div>
   );
 }
