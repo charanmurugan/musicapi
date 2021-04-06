@@ -43,9 +43,8 @@ input {
 .fa-heart {
   position: relative;
   top: -10px;
-  left: 20px;
+  left: 10px;
   font-size: larger;
-  display: none;
 }
 .search__results {
   display: flex;

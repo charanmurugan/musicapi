@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import ReactAudioPlayer from "react-audio-player";
 import "./view.css";
 function View() {
-  const [clicked, setClicked] = useState(false);
   let view = useSelector((state) => state.view.view);
+  let heart = useSelector((state) => state.click.heart);
   const viewResult = view.length === 1 && view[0].data;
-  console.log(viewResult);
+  const dispatch = useDispatch();
   return (
     <div className="view__screen">
       <div>
@@ -17,13 +17,21 @@ function View() {
         <div
           className=" view__like"
           onClick={() => {
-            setClicked(clicked ? false : true);
+            dispatch({
+              type: "ADD_TO_HEARTlIKE",
+            });
+            dispatch({
+              type: "ADD_TO_BASKETLIKE",
+              item: {
+                data: view,
+              },
+            });
           }}
         >
           <i
             className="fa fa-heart view__heart"
             aria-hidden="true"
-            style={{ color: clicked ? "red" : "lightblue", fontSize: "30px" }}
+            style={{ color: heart ? "red" : "lightblue", fontSize: "30px" }}
           ></i>
         </div>
         <img src={viewResult.artworkUrl100} alt="" className="view__image" />
@@ -31,14 +39,17 @@ function View() {
 
       <div>
         <div className="view__details">
-          <p>
-            <em>
-              <bold>
-                <strong>Artist Name </strong>
-              </bold>
-            </em>
-            : {viewResult.artistName}
-          </p>
+          {viewResult.artistName && (
+            <p>
+              <em>
+                <bold>
+                  <strong>Artist Name </strong>
+                </bold>
+              </em>
+              : {viewResult.artistName}
+            </p>
+          )}
+
           {viewResult.kind && (
             <p>
               <em>
@@ -66,7 +77,7 @@ function View() {
               <p className="view_audioPreview">
                 <em>
                   <bold>
-                    <strong> Audio Preview </strong>
+                    {viewResult.previewUrl && <strong> Audio Preview </strong>}
                   </bold>
                 </em>
               </p>
@@ -81,7 +92,7 @@ function View() {
               <p className="view_videoPreview">
                 <em>
                   <bold>
-                    <strong> Video Preview </strong>
+                    {viewResult.previewUrl && <strong> Video Preview </strong>}
                   </bold>
                 </em>
               </p>

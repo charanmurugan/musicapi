@@ -16,11 +16,6 @@ function Title() {
   const indexOfFirstData = indexOfLastData - dataPerPage;
   const currentData =
     song.length === 1 && temp.slice(indexOfFirstData, indexOfLastData);
-  const handleLoad = (event) => {
-    // const titleHeight = event.target.clientHeight;
-    // console.log(titleHeight);
-    console.log(event);
-  };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -37,10 +32,7 @@ function Title() {
   //   <div>Loading</div>;
   // }
   return (
-    <div
-      className={view.length === 1 ? "title" : "title1"}
-      onClick={handleLoad}
-    >
+    <div className={view.length === 1 ? "title" : "title1"}>
       {song.length === 1 && (
         <>
           <div>
@@ -53,6 +45,9 @@ function Title() {
                   <div
                     className="title__content"
                     onClick={() => {
+                      dispatch({
+                        type: "REMOVE_FROM_HEARTlIKE",
+                      });
                       dispatch({
                         type: "REMOVE_FROM_BASKETVIEW",
                       });

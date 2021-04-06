@@ -7,11 +7,14 @@ import axios from "axios";
 import Title from "./Title";
 import { useDispatch, useSelector } from "react-redux";
 import View from "./View";
+import Likescreen from "./Likescreen";
 
 function App() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [heart, setHeart] = useState(false);
   let view = useSelector((state) => state.view.view);
+  let like = useSelector((state) => state.like.like);
   let result;
   const dispatch = useDispatch();
 
@@ -21,6 +24,9 @@ function App() {
   const setItemSearch = async () => {
     dispatch({
       type: "REMOVE_FROM_BASKETVIEW",
+    });
+    dispatch({
+      type: "REMOVE_FROM_HEARTlIKE",
     });
     dispatch({
       type: "REMOVE_FROM_BASKET",
@@ -60,9 +66,16 @@ function App() {
             <i
               className="fa fa-heart"
               aria-hidden="true"
-              style={{ color: "red" }}
+              onClick={() => {
+                setHeart(heart ? false : true);
+              }}
+              style={{
+                color: "red",
+                display: like.length >= 1 ? "block" : "none",
+              }}
             ></i>
           </Badge>
+          {heart && <Likescreen />}
         </IconButton>
       </div>
       <div className="search__results">
