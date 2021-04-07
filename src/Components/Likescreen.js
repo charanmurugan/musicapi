@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./Like.css";
+import "../Styles/Like.css";
 
 function Likescreen() {
   let like = useSelector((state) => state.like.like);

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import ReactAudioPlayer from "react-audio-player";
-import "./view.css";
+import "../Styles/view.css";
 function View() {
   let view = useSelector((state) => state.view.view);
   let heart = useSelector((state) => state.click.heart);

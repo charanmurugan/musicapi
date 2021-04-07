@@ -1,4 +1,4 @@
-import "./App.css";
+import "../Styles/App.css";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";

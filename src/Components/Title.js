@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./title.css";
+import "../Styles/title.css";
 import PaginationPage from "./Pagination";
 
 function Title() {
